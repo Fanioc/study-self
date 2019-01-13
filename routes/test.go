@@ -10,7 +10,7 @@ var test = Route{
 	Method:      "Party", // HTTP method
 	Pattern:     "/test", // Route pattern
 	HandlerFunc: nil,
-	Routes: Routes{
+	Routes: []Route{
 		{
 			"GetAccount",   // Name
 			"GET",          // HTTP method

@@ -1,0 +1,183 @@
+basePath: '{{.BasePath}}'
+definitions:
+  controllers.Pet3:
+    properties:
+      id:
+        type: integer
+    type: object
+  routes.Route:
+    properties:
+      handlerFunc:
+        type: string
+      method:
+        type: string
+      name:
+        type: string
+      pattern:
+        type: string
+      routes:
+        items:
+          $ref: '#/definitions/routes.Route'
+        type: array
+    type: object
+host: '{{.Host}}'
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: '{{.Description}}'
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: '{{.Title}}'
+  version: '{{.Version}}'
+paths:
+  /file/upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Upload file
+      operationId: file.upload
+      parameters:
+      - description: this is a test file
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/routes.Route'
+            type: object
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/routes.Route'
+            type: object
+      summary: Upload file
+      tags:
+      - V3
+  /testapi/get-string-by-int/{some_id}:
+    get:
+      consumes:
+      - application/json
+      description: 描述
+      operationId: get-string-by-int
+      parameters:
+      - description: Some ID
+        format: int64
+        in: path
+        name: some_id
+        required: true
+        type: integer
+      - description: Some ID
+        in: body
+        name: some_id
+        required: true
+        schema:
+          $ref: '#/definitions/controllers.Pet3'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/controllers.Pet3'
+            type: object
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/routes.Route'
+            type: object
+      summary: 测试接口ffff
+      tags:
+      - V1
+  /testapi/get-struct-array-by-string/{some_id}:
+    get:
+      consumes:
+      - application/json
+      description: 测试接口
+      operationId: get-struct-array-by-string
+      parameters:
+      - description: Some ID
+        in: path
+        name: some_id
+        required: true
+        type: string
+      - description: Category
+        enum:
+        - 1
+        - 2
+        - 3
+        in: query
+        name: category
+        required: true
+        type: integer
+      - default: 0
+        description: Offset
+        in: query
+        minimum: 0
+        name: offset
+        required: true
+        type: integer
+      - default: 10
+        description: Limit
+        in: query
+        maximum: 50
+        name: limit
+        required: true
+        type: integer
+      - default: '""'
+        description: q
+        in: query
+        maxLength: 50
+        minLength: 1
+        name: q
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need ID!!
+          schema:
+            $ref: '#/definitions/routes.Route'
+            type: object
+        "404":
+          description: Can not find ID
+          schema:
+            $ref: '#/definitions/routes.Route'
+            type: object
+      security:
+      - ApiKeyAuth: []
+      - BasicAuth: []
+      - OAuth2Application:
+        - write
+      - OAuth2Implicit:
+        - read
+        - admin
+      - OAuth2AccessCode:
+        - read
+      - OAuth2Password:
+        - admin
+      tags:
+      - V2
+swagger: "2.0"

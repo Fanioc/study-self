@@ -1,0 +1,275 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "{{.Description}}",
+        "title": "{{.Title}}",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "{{.Version}}"
+    },
+    "host": "{{.Host}}",
+    "basePath": "{{.BasePath}}",
+    "paths": {
+        "/file/upload": {
+            "post": {
+                "description": "Upload file",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "V3"
+                ],
+                "summary": "Upload file",
+                "operationId": "file.upload",
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "this is a test file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "We need ID!!",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/routes.Route"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find ID",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/routes.Route"
+                        }
+                    }
+                }
+            }
+        },
+        "/testapi/get-string-by-int/{some_id}": {
+            "get": {
+                "description": "描述",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "V1"
+                ],
+                "summary": "测试接口ffff",
+                "operationId": "get-string-by-int",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Some ID",
+                        "name": "some_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Some ID",
+                        "name": "some_id",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/controllers.Pet3"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "We need ID!!",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/controllers.Pet3"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find ID",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/routes.Route"
+                        }
+                    }
+                }
+            }
+        },
+        "/testapi/get-struct-array-by-string/{some_id}": {
+            "get": {
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    },
+                    {
+                        "BasicAuth": []
+                    },
+                    {
+                        "OAuth2Application": [
+                            "write"
+                        ]
+                    },
+                    {
+                        "OAuth2Implicit": [
+                            "read",
+                            "admin"
+                        ]
+                    },
+                    {
+                        "OAuth2AccessCode": [
+                            "read"
+                        ]
+                    },
+                    {
+                        "OAuth2Password": [
+                            "admin"
+                        ]
+                    }
+                ],
+                "description": "测试接口",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "V2"
+                ],
+                "operationId": "get-struct-array-by-string",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Some ID",
+                        "name": "some_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "enum": [
+                            1,
+                            2,
+                            3
+                        ],
+                        "type": "integer",
+                        "description": "Category",
+                        "name": "category",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "default": 0,
+                        "description": "Offset",
+                        "name": "offset",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maximum": 50,
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Limit",
+                        "name": "limit",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "maxLength": 50,
+                        "minLength": 1,
+                        "type": "string",
+                        "default": "\"\"",
+                        "description": "q",
+                        "name": "q",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "We need ID!!",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/routes.Route"
+                        }
+                    },
+                    "404": {
+                        "description": "Can not find ID",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/routes.Route"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controllers.Pet3": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "routes.Route": {
+            "type": "object",
+            "properties": {
+                "handlerFunc": {
+                    "type": "string"
+                },
+                "method": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pattern": {
+                    "type": "string"
+                },
+                "routes": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/routes.Route"
+                    }
+                }
+            }
+        }
+    }
+}

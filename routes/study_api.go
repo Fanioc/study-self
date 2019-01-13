@@ -1,20 +1,20 @@
 package routes
 
-import "github.com/kataras/iris"
+import (
+	"github.com/fanioc/study-self/web/controllers"
+)
 
 var studyRoutes = Route{
 	Name:        "自习接口api",
 	Method:      "Party",
 	Pattern:     "study.", // sub domain
 	HandlerFunc: nil,
-	Routes: Routes{
+	Routes: []Route{
 		{
 			"index",
 			"GET",
 			"/",
-			func(ctx iris.Context) { //对应一个方法
-				_, _ = ctx.Write([]byte(`{"result":"study"}`))
-			},
+			controllers.GetStringByInt,
 			nil,
 		},
 	},

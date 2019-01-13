@@ -1,0 +1,22 @@
+[app]
+  #app 名称
+  name = "study-self"
+  # app url
+  url  = "http://localhost"
+  # app 文档地址
+  doc = "./apidoc"
+  addr = ":8080"
+
+  debug = false
+  env = "develop" #product
+
+#数据库驱动
+[database]
+   [database.local]
+     Dirver = "mysql"
+     User =     "root"
+     Password = ""
+     Host =    "127.0.0.1"
+     Port =   "3306"
+     Dbname =   "self_study"
+     Charset = "utf8"
